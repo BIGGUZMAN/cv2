@@ -1,0 +1,391 @@
+/* ==========================================================================
+   Reset y Variables
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --border: #e2e8f0;
+  --primary: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+html.dark {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ==========================================================================
+   Botón Modo Oscuro (Arriba Derecha)
+   ========================================================================== */
+#modoOscuro {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
+}
+
+#modoOscuro:hover {
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Header (Tamaño corregido)
+   ========================================================================== */
+/* Estilos para la foto de perfil */
+.profile-pic {
+  width: 120px;          /* Tamaño de la foto */
+  height: 120px;
+  border-radius: 50%;    /* La hace circular */
+  object-fit: cover;     /* Evita que se deforme la imagen */
+  border: 4px solid rgba(255, 255, 255, 0.3); /* Un borde elegante */
+  margin-bottom: 1.5rem; /* Espacio entre la foto y tu nombre */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+  border-color: white;
+}
+
+/* Contenedor opcional para asegurar el centrado */
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background: linear-gradient(135deg, #d30909 0%, #3b82f6 100%);
+  color: white;
+  text-align: center;
+  padding: 2rem 2rem 2rem;
+  border-radius: 0 0 2rem 2rem;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin-bottom: 0.5rem;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Contenedor y Tarjetas
+   ========================================================================== */
+main {
+  max-width: 850px;
+  margin: 0 auto 4rem;
+  padding: 0 1.2rem;
+}
+
+section {
+  background: var(--surface);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+section h2 {
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+  border-bottom: 3px solid var(--primary);
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* Tags/Skills */
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.tools span {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Fondo de Partículas Mejorado
+   ========================================================================== */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--primary);
+  /* Efecto de resplandor (glow) */
+  box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+  opacity: 0.6;
+  animation: float-particles 20s linear infinite;
+}
+
+/* Ajuste para que en modo oscuro brillen más */
+html.dark .particle {
+  opacity: 0.8;
+  filter: brightness(1.2);
+}
+
+@keyframes float-particles {
+  0% {
+    transform: translateY(110vh) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(50px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Diferentes tamaños y posiciones para las partículas */
+.particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { width: 12px; height: 12px; left: 30%; animation-delay: 2s; }
+.particle:nth-child(3) { width: 6px; height: 6px; left: 50%; animation-delay: 4s; }
+.particle:nth-child(4) { width: 10px; height: 10px; left: 70%; animation-delay: 6s; }
+.particle:nth-child(5) { width: 15px; height: 15px; left: 85%; animation-delay: 8s; }
+.particle:nth-child(6) { width: 7px; height: 7px; left: 20%; animation-delay: 10s; }
+.particle:nth-child(7) { width: 11px; height: 11px; left: 45%; animation-delay: 12s; }
+.particle:nth-child(8) { width: 9px; height: 9px; left: 65%; animation-delay: 14s; }
+
+
+
+
+.error-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f 0%, #2a1a3d 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.content {
+  text-align: center;
+  max-width: 600px;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.error-code {
+  font-size: clamp(8rem, 25vw, 18rem);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  background: linear-gradient(90deg, #a78bfa, #7c3aed, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  position: relative;
+  user-select: none;
+}
+
+.error-code::before,
+.error-code::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.08;
+}
+
+.error-code::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00aa;
+  animation: glitch-1 3s infinite linear alternate-reverse;
+}
+
+.error-code::after {
+  left: -2px;
+  text-shadow: 2px 0 #00ffff;
+  animation: glitch-2 2.5s infinite linear alternate-reverse;
+}
+
+.title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  margin: 1.5rem 0 1rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #c084fc, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #d1d5db;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn.primary {
+  background: linear-gradient(45deg, #7c3aed, #a78bfa);
+  color: white;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.35);
+}
+
+.btn.primary:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 20px 35px rgba(124, 58, 237, 0.5);
+}
+
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+.fun-fact {
+  margin-top: 4rem;
+  font-size: 1.1rem;
+  color: #a78bfa;
+  opacity: 0.7;
+  transition: transform 0.8s ease;
+  cursor: default;
+  user-select: none;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch-1 {
+  0%   { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.6deg); }
+  5%   { clip: rect(17px, 9999px, 53px, 0); transform: skew(0.4deg); }
+  /* ... puedes agregar más keyframes si quieres más glitch */
+  100% { clip: rect(68px, 9999px, 29px, 0); transform: skew(0.2deg); }
+}
+
+@keyframes glitch-2 {
+  0%   { clip: rect(65px, 9999px, 100px, 0); transform: skew(-0.2deg); }
+  /* más keyframes... */
+}
+
+/* Contenedor de los botones */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio entre botones */
+  margin-top: 20px;
+}
+
+/* Estilo base para los botones */
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: white;
+  display: inline-block;
+}
+
+/* Efecto al presionar o pasar el mouse */
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Colores específicos */
+.btn-linkedin {
+  background-color: #67b4de;
+}
+
+.btn-github {
+  background-color: #333;
+}
+
+/* Asegurar que el contenedor principal centre todo el texto */
+.cv-container {
+  text-align: center;
+}
