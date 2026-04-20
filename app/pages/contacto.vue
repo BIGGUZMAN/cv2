@@ -1,8 +1,11 @@
 <script setup>
+import { ref } from 'vue'
+
 const form = ref({
   nombre: '',
   email: '',
-  mensaje: ''
+  telefono: '',
+  proyecto: ''
 })
 
 const enviando = ref(false)
@@ -12,22 +15,22 @@ const enviarFormulario = async () => {
   enviando.value = true
   mensajeEstado.value = 'Enviando mensaje...'
 
-  // Simulamos una Promesa de API
-  const apiPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const exito = true // Cambia a false para probar el error
-      if (exito) resolve('¡Mensaje enviado con éxito!')
-      else reject('Hubo un error al enviar.')
-    }, 2000)
-  })
-
   try {
-    const respuesta = await apiPromise
-    mensajeEstado.value = respuesta
-    // Limpiar formulario
-    form.value = { nombre: '', email: '', mensaje: '' }
+   const response = await fetch("http://localhost:4000/api/form", { method: "POST",
+body: JSON.stringify(form.value), headers: { "Content-Type": "application/json"
+} })
+
+
+
+    const result = await response.json()
+    if (result.result === 'success') {
+      mensajeEstado.value = '¡Datos enviados con éxito!'
+      form.value = { nombre: '', email: '', telefono: '', proyecto: '' }
+    } else {
+      mensajeEstado.value = 'Error al enviar.'
+    }
   } catch (error) {
-    mensajeEstado.value = error
+    mensajeEstado.value = 'Hubo un error de conexión.'
   } finally {
     enviando.value = false
   }
@@ -59,11 +62,21 @@ const enviarFormulario = async () => {
       </div>
 
       <div class="input-group">
-        <label>Mensaje</label>
+        <label>Teléfono</label>
+        <input
+          v-model="form.telefono"
+          type="tel"
+          placeholder="Tu teléfono"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Proyecto</label>
         <textarea
-          v-model="form.mensaje"
+          v-model="form.proyecto"
           rows="4"
-          placeholder="¿En qué puedo ayudarte?"
+          placeholder="Describe tu proyecto"
           required
         ></textarea>
       </div>
@@ -76,6 +89,7 @@ const enviarFormulario = async () => {
     </form>
   </section>
 </template>
+
 
 <style scoped>
 .contacto-container {
