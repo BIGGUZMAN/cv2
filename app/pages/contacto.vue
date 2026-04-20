@@ -16,13 +16,15 @@ const enviarFormulario = async () => {
   mensajeEstado.value = 'Enviando mensaje...'
 
   try {
-   const response = await fetch("http://localhost:4000/api/form", { method: "POST",
-body: JSON.stringify(form.value), headers: { "Content-Type": "application/json"
-} })
-
-
+    // Se cambió la URL local por la ruta relativa para que funcione en Vercel
+    const response = await fetch('/api/form', {
+      method: 'POST',
+      body: JSON.stringify(form.value),
+      headers: { 'Content-Type': 'application/json' }
+    })
 
     const result = await response.json()
+
     if (result.result === 'success') {
       mensajeEstado.value = '¡Datos enviados con éxito!'
       form.value = { nombre: '', email: '', telefono: '', proyecto: '' }
@@ -89,7 +91,6 @@ body: JSON.stringify(form.value), headers: { "Content-Type": "application/json"
     </form>
   </section>
 </template>
-
 
 <style scoped>
 .contacto-container {
